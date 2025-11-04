@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persoonlijke Mok Survey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .question-group {
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .style-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .style-option {
+            position: relative;
+        }
+        
+        .style-option input[type="radio"] {
+            display: none;
+        }
+        
+        .style-card {
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .style-card:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .style-option input[type="radio"]:checked + .style-card {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+        
+        .style-emoji {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        
+        input[type="file"] {
+            padding: 10px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .file-note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 30px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .emoji-icon {
+            margin-right: 5px;
+        }
+
+        .success-message {
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.3);
+        }
+
+        .success-message h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            margin-top: 20px;
+            padding: 20px;
+            background: #ff6b6b;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 2.5em; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Mok You Up</div>
+        </div>
+        <h1>☕ Jouw Persoonlijke Mok</h1>
+        <p class="subtitle">Vertel ons over jezelf, wij ontwerpen jouw unieke mok!</p>
+        
+        <form id="mugForm" action="https://formspree.io/f/manlgepk" method="POST" enctype="multipart/form-data">
+            <!-- Persoonlijke Info -->
+            <div class="question-group">
+                <label><span class="emoji-icon">👤</span>Wat is je voor- en achternaam?</label>
+                <input type="text" name="naam" required placeholder="Bijv. Sarah Janssens">
+            </div>
+
+            <div class="question-group">
+                <label><span class="emoji-icon">📧</span>Je e-mailadres</label>
+                <input type="email" name="email" required placeholder="naam@voorbeeld.be">
+            </div>
+
+            <!-- School/Campus -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🏫</span>Op welke school of campus geef je les?</label>
+                <input type="text" name="school" required placeholder="Bijv. Basisschool De Regenboog, Campus Sint-Pieters">
+            </div>
+
+            <!-- Kleur -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🎨</span>Wat is je lievelingskleur of kleurencombinatie?</label>
+                <input type="text" name="kleur" required placeholder="Bijv. mintgroen, paars en goud, pastel roze...">
+            </div>
+
+            <!-- Vak -->
+            <div class="question-group">
+                <label><span class="emoji-icon">📚</span>Welk vak of vakken geef je?</label>
+                <input type="text" name="vak" required placeholder="Bijv. Wiskunde, Nederlands">
+            </div>
+
+            <!-- Graad -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🎓</span>In welke graad of leerjaar geef je les?</label>
+                <select name="graad" required>
+                    <option value="">-- Kies een optie --</option>
+                    <option value="Kleuterschool">Kleuterschool</option>
+                    <option value="1e leerjaar">1e leerjaar</option>
+                    <option value="2e leerjaar">2e leerjaar</option>
+                    <option value="3e leerjaar">3e leerjaar</option>
+                    <option value="4e leerjaar">4e leerjaar</option>
+                    <option value="5e leerjaar">5e leerjaar</option>
+                    <option value="6e leerjaar">6e leerjaar</option>
+                    <option value="1e middelbaar">1e middelbaar</option>
+                    <option value="2e middelbaar">2e middelbaar</option>
+                    <option value="3e middelbaar">3e middelbaar</option>
+                    <option value="4e middelbaar">4e middelbaar</option>
+                    <option value="5e middelbaar">5e middelbaar</option>
+                    <option value="6e middelbaar">6e middelbaar</option>
+                    <option value="Hogeschool">Hogeschool</option>
+                    <option value="Meerdere leerjaren">Meerdere leerjaren</option>
+                </select>
+            </div>
+
+            <!-- Lievelingsdier -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🐾</span>Wat is je lievelingsdier?</label>
+                <input type="text" name="dier" placeholder="Bijv. kat, hond, uil, olifant...">
+            </div>
+
+            <!-- Hobby's -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🎯</span>Wat zijn je hobby's in je vrije tijd?</label>
+                <input type="text" name="hobbys" placeholder="Bijv. lezen, yoga, tuinieren, reizen...">
+            </div>
+
+            <!-- Quote -->
+            <div class="question-group">
+                <label><span class="emoji-icon">💬</span>Heb je een favoriete quote of spreuk?</label>
+                <textarea name="quote" placeholder="Een motiverende uitspraak die je inspireert..."></textarea>
+            </div>
+
+            <!-- Stijl -->
+            <div class="question-group">
+                <label><span class="emoji-icon">✨</span>Welke stijl spreekt je aan?</label>
+                <div class="style-options">
+                    <div class="style-option">
+                        <input type="radio" name="stijl" id="style1" value="Modern/Minimalistisch" required>
+                        <label for="style1" class="style-card">
+                            <div class="style-emoji">🔲</div>
+                            <div>Modern/<br>Minimalistisch</div>
+                        </label>
+                    </div>
+                    <div class="style-option">
+                        <input type="radio" name="stijl" id="style2" value="Speels/Kleurrijk">
+                        <label for="style2" class="style-card">
+                            <div class="style-emoji">🎨</div>
+                            <div>Speels/<br>Kleurrijk</div>
+                        </label>
+                    </div>
+                    <div class="style-option">
+                        <input type="radio" name="stijl" id="style3" value="Elegant/Klassiek">
+                        <label for="style3" class="style-card">
+                            <div class="style-emoji">👑</div>
+                            <div>Elegant/<br>Klassiek</div>
+                        </label>
+                    </div>
+                    <div class="style-option">
+                        <input type="radio" name="stijl" id="style4" value="Grappig/Humoristisch">
+                        <label for="style4" class="style-card">
+                            <div class="style-emoji">😄</div>
+                            <div>Grappig/<br>Humoristisch</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Symbolen -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🌟</span>Zijn er specifieke symbolen of elementen die je graag op je mok zou zien?</label>
+                <input type="text" name="symbolen" placeholder="Bijv. boeken, appel, potlood, hart, sterren...">
+            </div>
+
+            <!-- Naam op mok -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🏷️</span>Wil je je naam op de mok?</label>
+                <select name="naam_op_mok" id="naam_op_mok" required onchange="toggleNaamVeld()">
+                    <option value="">-- Kies een optie --</option>
+                    <option value="Ja">Ja, ik wil mijn naam op de mok</option>
+                    <option value="Nee">Nee, liever geen naam</option>
+                </select>
+            </div>
+
+            <div class="question-group" id="naam_veld" style="display: none;">
+                <label><span class="emoji-icon">✍️</span>Welke naam wil je op de mok?</label>
+                <input type="text" name="naam_tekst" id="naam_tekst" placeholder="Bijv. Juf Sarah, Meester Tom, of gewoon Sarah">
+                <p class="file-note">Tip: Je kunt ook een bijnaam of roepnaam gebruiken</p>
+            </div>
+
+            <!-- Extra wensen -->
+            <div class="question-group">
+                <label><span class="emoji-icon">💭</span>Heb je nog extra wensen of ideeën voor je mok?</label>
+                <textarea name="extra" placeholder="Vertel ons alles wat je nog kwijt wilt..."></textarea>
+            </div>
+
+            <!-- Upload foto -->
+            <div class="question-group">
+                <label><span class="emoji-icon">📸</span>Upload eventueel een foto ter inspiratie</label>
+                <input type="file" name="foto" accept="image/*">
+                <p class="file-note">Optioneel: Een foto van je huisdier, favoriete plek of andere inspiratie</p>
+            </div>
+
+            <!-- BETALING SECTIE -->
+            <div style="margin-top: 50px; padding-top: 30px; border-top: 3px solid #667eea;">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">💳 Bestelling & Betaling</h2>
+                
+                <!-- Aantal mokken -->
+                <div class="question-group">
+                    <label><span class="emoji-icon">🔢</span>Hoeveel mokken wil je bestellen?</label>
+                    <select name="aantal" id="aantal" required onchange="calculateTotal()">
+                        <option value="">-- Kies aantal --</option>
+                        <option value="1 mok">1 mok - €10,00</option>
+                        <option value="2 mokken">2 mokken - €18,00 (€9,00/stuk)</option>
+                        <option value="3 mokken">3 mokken - €27,00 (€9,00/stuk)</option>
+                        <option value="4 mokken">4 mokken - €36,00 (€9,00/stuk)</option>
+                        <option value="5+ mokken">5+ mokken - Neem contact op voor prijsafspraak</option>
+                    </select>
+                </div>
+
+                <!-- Bezorgadres -->
+                <div class="question-group">
+                    <label><span class="emoji-icon">📍</span>Straat + huisnummer</label>
+                    <input type="text" name="straat" required placeholder="Bijv. Kerkstraat 123">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px;">
+                    <div class="question-group">
+                        <label><span class="emoji-icon">📮</span>Postcode</label>
+                        <input type="text" name="postcode" required placeholder="9000">
+                    </div>
+                    <div class="question-group">
+                        <label><span class="emoji-icon">🏙️</span>Stad</label>
+                        <input type="text" name="stad" required placeholder="Gent">
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label><span class="emoji-icon">🌍</span>Land</label>
+                    <select name="land" id="land" required onchange="calculateTotal()">
+                        <option value="België (gratis verzending)">België (gratis verzending)</option>
+                        <option value="Nederland (+€3,50 verzending)">Nederland (+€3,50 verzending)</option>
+                        <option value="Ander land (verzendkosten op aanvraag)">Ander land (verzendkosten op aanvraag)</option>
+                    </select>
+                </div>
+
+                <!-- Hidden field voor totaalbedrag -->
+                <input type="hidden" name="totaalbedrag" id="totaalbedrag_hidden">
+
+                <!-- Totaal overzicht -->
+                <div style="background: #f8f9ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Mokken:</span>
+                        <span id="prijs-mokken">€0,00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Verzendkosten:</span>
+                        <span id="prijs-verzending">€0,00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 2px solid #667eea; font-weight: bold; font-size: 1.2em; color: #667eea;">
+                        <span>Totaal:</span>
+                        <span id="prijs-totaal">€0,00</span>
+                    </div>
+                </div>
+
+                <!-- Betaalinformatie sectie -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; margin: 30px 0; color: white; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                    <h3 style="margin: 0 0 20px 0; font-size: 1.5em; text-align: center;">
+                        ☕ Belangrijke informatie over je bestelling
+                    </h3>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 10px; margin-bottom: 20px; backdrop-filter: blur(10px);">
+                        <p style="margin: 0 0 15px 0; font-size: 0.95em; line-height: 1.6;">
+                            Onze mokken worden pas in productie genomen zodra de betaling is ontvangen en bevestigd.
+                        </p>
+                        <p style="margin: 0; font-size: 0.95em; line-height: 1.6;">
+                            <strong>Gelieve bij je overschrijving duidelijk je voor- en achternaam te vermelden</strong>, zodat we je bestelling snel kunnen koppelen en verwerken.
+                        </p>
+                    </div>
+
+                    <div style="background: white; color: #333; padding: 25px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                        <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #666; font-weight: 600;">
+                            💳 Gelieve te betalen via overschrijving naar:
+                        </p>
+                        <p style="margin: 0; font-size: 1.8em; font-weight: bold; color: #667eea; letter-spacing: 2px; font-family: 'Courier New', monospace;">
+                            BE22 7310 7162 2347
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 10px; backdrop-filter: blur(10px);">
+                        <p style="margin: 0 0 15px 0; font-size: 0.95em; line-height: 1.6;">
+                            Zodra we je betaling hebben ontvangen, starten we met het maken van je mok(ken) en houden we je op de hoogte van de verdere voortgang.
+                        </p>
+                        <p style="margin: 0; font-size: 0.95em; line-height: 1.6; text-align: center; font-weight: 600;">
+                            ✨ Bedankt voor je begrip en vertrouwen! ✨
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Voorwaarden -->
+                <div class="question-group">
+                    <div style="display: flex; align-items: start; gap: 10px;">
+                        <input type="checkbox" id="voorwaarden" name="voorwaarden" required value="akkoord" style="margin-top: 4px; width: auto;">
+                        <label for="voorwaarden" style="font-weight: normal; margin: 0;">
+                            Ik ga akkoord met de algemene voorwaarden en het privacybeleid
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">🎉 Verstuur bestelling</button>
+        </form>
+
+        <div id="successMessage" style="display: none;"></div>
+        <div id="errorMessage" style="display: none;"></div>
+    </div>
+
+    <script>
+        function toggleNaamVeld() {
+            const naamOpMok = document.getElementById('naam_op_mok').value;
+            const naamVeld = document.getElementById('naam_veld');
+            const naamTekst = document.getElementById('naam_tekst');
+            
+            if (naamOpMok === 'Ja') {
+                naamVeld.style.display = 'block';
+                naamTekst.required = true;
+            } else {
+                naamVeld.style.display = 'none';
+                naamTekst.required = false;
+                naamTekst.value = '';
+            }
+        }
+
+        function calculateTotal() {
+            const aantal = document.getElementById('aantal').value;
+            let mokkenPrijs = 0;
+            
+            if (aantal === '1 mok') mokkenPrijs = 10;
+            else if (aantal === '2 mokken') mokkenPrijs = 18;
+            else if (aantal === '3 mokken') mokkenPrijs = 27;
+            else if (aantal === '4 mokken') mokkenPrijs = 36;
+            
+            document.getElementById('prijs-mokken').textContent = '€' + mokkenPrijs.toFixed(2);
+            
+            const land = document.getElementById('land').value;
+            let verzendkosten = 0;
+            if (land === 'Nederland (+€3,50 verzending)') verzendkosten = 3.50;
+            
+            document.getElementById('prijs-verzending').textContent = '€' + verzendkosten.toFixed(2);
+            
+            const total = mokkenPrijs + verzendkosten;
+            document.getElementById('prijs-totaal').textContent = '€' + total.toFixed(2);
+            document.getElementById('totaalbedrag_hidden').value = '€' + total.toFixed(2);
+        }
+
+        const form = document.getElementById('mugForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Bezig met verzenden...';
+            
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const naam = formData.get('naam');
+                    const email = formData.get('email');
+                    const totaal = document.getElementById('prijs-totaal').textContent;
+                    
+                    successMessage.innerHTML = `
+                        <div class="success-message">
+                            <h3>✅ Bestelling ontvangen!</h3>
+                            <p>Bedankt ${naam}! We hebben je bestelling goed ontvangen.</p>
+                            <p>Je ontvangt binnen 24 uur een bevestiging op <strong>${email}</strong></p>
+                            <p>Vergeet niet om <strong>${totaal}</strong> over te maken naar:</p>
+                            <p style="font-size: 1.3em; font-weight: bold; font-family: 'Courier New', monospace; letter-spacing: 1px;">BE22 7310 7162 2347</p>
+                            <p style="font-size: 0.95em;">met vermelding van je voor- en achternaam!</p>
+                        </div>
+                    `;
+                    successMessage.style.display = 'block';
+                    form.style.display = 'none';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    throw new Error('Er ging iets mis');
+                }
+            } catch (error) {
+                errorMessage.innerHTML = `
+                    <div class="error-message">
+                        <h3>❌ Er ging iets mis</h3>
+                        <p>We konden je bestelling niet verzenden. Probeer het opnieuw of neem contact met ons op.</p>
+                    </div>
+                `;
+                errorMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🎉 Verstuur bestelling';
+            }
+        });
+    </script>
+</body>
+</html>
