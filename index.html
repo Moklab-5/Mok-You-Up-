@@ -35,30 +35,29 @@
         }
         textarea { resize:vertical; min-height:100px; }
         .style-options {
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin-top:10px;
-    justify-content: center; /* <-- NIEUW: centreert de grid zelf */
-    justify-items: center;   /* <-- NIEUW: centreert de items binnen de grid */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+  justify-content: center;
+  justify-items: center;
 }
 
         .style-option { position:relative; }
         .style-option input[type="radio"] { display:none; }
         .style-card {
-    padding:16px 12px;
-    border:2px solid #e0e0e0;
-    border-radius:10px;
-    cursor:pointer;
-    transition:all 0.3s;
-    text-align:center;
-    min-height:100px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    width:100%;
-    max-width:160px;         /* <-- OPTIONEEL (aanrader): voorkomt dat kaarten tot randen reiken */
+  padding: 16px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 140px; /* ✅ vaste breedte */
 }
         .style-option input[type="radio"]:checked + .style-card { border-color:#667eea; background:#667eea; color:white; }
         .style-emoji { font-size:2em; margin-bottom:8px; }
