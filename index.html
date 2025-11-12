@@ -1,199 +1,432 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Persoonlijke Mok Survey</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 15px;
+            min-height:100vh; padding:15px;
         }
         .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width:700px; margin:0 auto; background:white; border-radius:16px;
+            padding:25px 20px; box-shadow:0 10px 40px rgba(0,0,0,0.2);
         }
-        @media (min-width: 768px) {
-            .container { padding: 40px; border-radius: 20px; }
-        }
-        h1 { color: #667eea; text-align: center; margin-bottom: 8px; font-size: 1.6em; }
-        @media (min-width: 768px) { h1 { font-size: 2em; } }
-        .subtitle {
-            text-align: center; color: #666; margin-bottom: 25px;
-            font-size: 1em; line-height: 1.4;
-        }
-        .question-group { margin-bottom: 25px; }
-        label {
-            display: block; font-weight: 600; color: #333;
-            margin-bottom: 8px; font-size: 0.95em; line-height: 1.4;
-        }
+        @media (min-width:768px) { .container { padding:40px; border-radius:20px; } }
+        h1 { color:#667eea; text-align:center; margin-bottom:8px; font-size:1.6em; }
+        @media (min-width:768px){ h1{ font-size:2em; } }
+        .subtitle { text-align:center; color:#666; margin-bottom:25px; font-size:1em; line-height:1.4; }
+        .question-group { margin-bottom:25px; }
+        label { display:block; font-weight:600; color:#333; margin-bottom:8px; font-size:0.95em; line-height:1.4; }
+        @media (min-width:768px) { label { font-size:1.05em; } }
         input[type="text"], input[type="email"], select, textarea {
-            width: 100%; padding: 14px 12px; border: 2px solid #e0e0e0;
-            border-radius: 8px; font-size: 16px; transition: all 0.3s; font-family: inherit;
+            width:100%; padding:14px 12px; border:2px solid #e0e0e0; border-radius:8px; font-size:16px;
+            transition:all 0.3s; font-family:inherit; -webkit-appearance:none; appearance:none;
         }
         input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
-            outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+            outline:none; border-color:#667eea; box-shadow:0 0 0 3px rgba(102,126,234,0.1);
         }
         select {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat; background-position: right 12px center;
-            background-size: 20px; padding-right: 40px;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat:no-repeat; background-position:right 12px center; background-size:20px; padding-right:40px;
         }
-        textarea { resize: vertical; min-height: 100px; }
-        .style-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
-        .style-option input[type="radio"] { display: none; }
+        textarea { resize:vertical; min-height:100px; }
+        .style-options { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:10px; }
+        .style-option { position:relative; }
+        .style-option input[type="radio"] { display:none; }
         .style-card {
-            padding: 16px 12px; border: 2px solid #e0e0e0; border-radius: 10px;
-            cursor: pointer; transition: all 0.3s; text-align: center; min-height: 100px;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding:16px 12px; border:2px solid #e0e0e0; border-radius:10px; cursor:pointer; transition:all 0.3s;
+            text-align:center; min-height:100px; display:flex; flex-direction:column; justify-content:center; align-items:center;
         }
-        .style-option input[type="radio"]:checked + .style-card {
-            border-color: #667eea; background: #667eea; color: white;
-        }
-        .style-emoji { font-size: 2em; margin-bottom: 8px; }
+        .style-option input[type="radio"]:checked + .style-card { border-color:#667eea; background:#667eea; color:white; }
+        .style-emoji { font-size:2em; margin-bottom:8px; }
+        input[type="file"] { padding:12px; border:2px dashed #e0e0e0; border-radius:8px; width:100%; cursor:pointer; font-size:14px; }
+        .file-note { font-size:0.85em; color:#666; margin-top:6px; line-height:1.4; }
         .submit-btn {
-            width: 100%; padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; border: none; border-radius: 10px;
-            font-size: 1.05em; font-weight: 600; cursor: pointer;
-            transition: all 0.3s; margin-top: 30px;
+            width:100%; padding:16px; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:white; border:none;
+            border-radius:10px; font-size:1.05em; font-weight:600; cursor:pointer; transition:all 0.3s; margin-top:30px;
+            -webkit-tap-highlight-color:transparent;
         }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .submit-btn:active { transform:scale(0.98); }
+        .submit-btn:disabled { opacity:0.6; cursor:not-allowed; }
+        .emoji-icon { margin-right:5px; }
         .success-message {
-            margin-top: 20px; padding: 25px 20px;
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            border-radius: 12px; text-align: center; color: white;
-            box-shadow: 0 8px 25px rgba(17,153,142,0.3);
+            margin-top:20px; padding:25px 20px; background:linear-gradient(135deg,#11998e 0%,#38ef7d 100%);
+            border-radius:12px; text-align:center; color:white; box-shadow:0 8px 25px rgba(17,153,142,0.3);
         }
-        .success-message h3 { font-size: 1.5em; margin-bottom: 12px; }
-        .success-message p { font-size: 1em; line-height: 1.6; margin-bottom: 10px; }
+        @media (min-width:768px){ .success-message{ padding:30px; border-radius:15px; } }
+        .success-message h3 { font-size:1.5em; margin-bottom:12px; }
+        @media (min-width:768px){ .success-message h3 { font-size:1.8em; margin-bottom:15px; } }
+        .success-message p { font-size:1em; line-height:1.6; margin-bottom:10px; }
         .error-message {
-            margin-top: 20px; padding: 20px; background: #ff6b6b;
-            border-radius: 10px; color: white; text-align: center;
+            margin-top:20px; padding:20px; background:#ff6b6b; border-radius:10px; color:white; text-align:center;
         }
-        .logo { text-align: center; margin-bottom: 15px; }
+        .section-divider { margin-top:40px; padding-top:25px; border-top:3px solid #667eea; }
+        @media (min-width:768px){ .section-divider{ margin-top:50px; padding-top:30px; } }
+        .section-title { color:#667eea; text-align:center; margin-bottom:20px; font-size:1.4em; }
+        @media (min-width:768px){ .section-title{ font-size:1.6em; margin-bottom:25px; } }
+        .address-grid { display:grid; grid-template-columns:1fr; gap:0; }
+        @media (min-width:500px){ .address-grid { grid-template-columns:1fr 2fr; gap:15px; } }
+        .price-box { background:#f8f9ff; padding:18px; border-radius:10px; margin:20px 0; }
+        .price-row, .price-total { display:flex; justify-content:space-between; }
+        .price-row { margin-bottom:10px; font-size:0.95em; }
+        .price-total { padding-top:12px; border-top:2px solid #667eea; font-weight:bold; font-size:1.1em; color:#667eea; }
+        @media (min-width:768px){ .price-total{ font-size:1.2em; } }
+        .info-box {
+            background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); padding:20px 18px; border-radius:12px; margin:25px 0; color:white;
+            box-shadow:0 8px 25px rgba(102,126,234,0.3);
+        }
+        .info-section { background:rgba(255,255,255,0.15); padding:16px; border-radius:8px; margin-bottom:15px; backdrop-filter:blur(10px); }
+        .bank-account { background:white; color:#333; padding:20px; border-radius:10px; text-align:center; margin-bottom:15px; }
+        .bank-account p:first-child { margin:0 0 8px 0; font-size:0.85em; color:#666; font-weight:600; }
+        .bank-account p:last-child { margin:0; font-size:1.4em; font-weight:bold; color:#667eea; letter-spacing:1px; font-family:'Courier New', monospace; word-break:break-all; }
+        .checkbox-wrapper { display:flex; align-items:start; gap:10px; }
+        .checkbox-wrapper input[type="checkbox"] { margin-top:4px; width:auto; min-width:18px; min-height:18px; flex-shrink:0; }
+        .checkbox-wrapper label { font-weight:normal; margin:0; font-size:0.9em; line-height:1.5; }
+        .checkbox-wrapper a { color:#667eea; text-decoration:underline; }
+        .logo { text-align:center; margin-bottom:15px; }
         .logo-text {
-            font-size: 2em; font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size:2em; font-weight:bold; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
         }
+        @media (min-width:768px){ .logo-text{ font-size:2.5em; } }
+        .hidden { display:none; }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="logo"><div class="logo-text">Mok You Up</div></div>
-    <h1>☕ Jouw Persoonlijke Mok</h1>
-    <p class="subtitle">Vertel ons over jezelf, wij ontwerpen jouw unieke mok!</p>
-
-    <form id="mugForm" action="https://formspree.io/f/mldaeyre" method="POST" enctype="multipart/form-data">
-        <!-- Voorbeeld velden (kort gehouden voor leesbaarheid) -->
-        <div class="question-group">
-            <label>👤 Wat is je voor- en achternaam?</label>
-            <input type="text" name="naam" required placeholder="Bijv. Sarah Janssens">
-        </div>
-
-        <div class="question-group">
-            <label>📧 Je e-mailadres</label>
-            <input type="email" name="email" required placeholder="naam@voorbeeld.be">
-        </div>
-
-        <div class="question-group">
-            <label>🔢 Hoeveel mokken wil je bestellen?</label>
-            <select name="aantal" id="aantal" required onchange="calculateTotal()">
-                <option value="">-- Kies aantal --</option>
-                <option value="1">1 mok - €10,00</option>
-                <option value="2">2 mokken - €18,00</option>
-                <option value="3">3 mokken - €27,00</option>
-                <option value="4">4 mokken - €36,00</option>
-            </select>
-        </div>
-
-        <div class="question-group">
-            <label>📍 Leveradres</label>
-            <input type="text" name="leveradres" required placeholder="Bijv. Basisschool De Regenboog, lokaal 2.3">
-        </div>
-
-        <input type="hidden" name="totaalbedrag" id="totaalbedrag_hidden">
-
-        <div class="price-box">
-            <div class="price-total">
-                <span>Totaal:</span>
-                <span id="prijs-totaal">€0,00</span>
+    <div class="container">
+        <div class="logo"><div class="logo-text">Mok You Up</div></div>
+        <h1>☕ Jouw Persoonlijke Mok</h1>
+        <p class="subtitle">Vertel ons over jezelf, wij ontwerpen jouw unieke mok!</p>
+        
+        <form id="mugForm" action="https://formspree.io/f/mldaeyre" method="POST" enctype="multipart/form-data">
+            <!-- Persoonlijke Info -->
+            <div class="question-group">
+                <label><span class="emoji-icon">👤</span>Wat is je voor- en achternaam?</label>
+                <input type="text" name="naam" required placeholder="Bijv. Sarah Janssens">
             </div>
-        </div>
 
-        <button type="submit" class="submit-btn" id="submitBtn">🎉 Verstuur bestelling</button>
-    </form>
+            <div class="question-group">
+                <label><span class="emoji-icon">📧</span>Je e-mailadres</label>
+                <input type="email" name="email" required placeholder="naam@voorbeeld.be">
+            </div>
 
-    <div id="successMessage" style="display:none;"></div>
-    <div id="errorMessage" style="display:none;"></div>
-</div>
+            <!-- School/Campus -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🏫</span>Op welke school of campus geef je les? (Je mok wordt hier geleverd)</label>
+                <input type="text" name="school" required placeholder="Bijv. Basisschool De Regenboog, Campus Sint-Pieters">
+            </div>
 
-<script>
-function calculateTotal() {
-    const aantal = document.getElementById('aantal').value;
-    let mokkenPrijs = 0;
-    if (aantal === '1') mokkenPrijs = 10;
-    else if (aantal === '2') mokkenPrijs = 18;
-    else if (aantal === '3') mokkenPrijs = 27;
-    else if (aantal === '4') mokkenPrijs = 36;
-    document.getElementById('prijs-totaal').textContent = '€' + mokkenPrijs.toFixed(2);
-    document.getElementById('totaalbedrag_hidden').value = '€' + mokkenPrijs.toFixed(2);
-}
+            <!-- Kleur -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🎨</span>Wat is je lievelingskleur of kleurencombinatie?</label>
+                <input type="text" name="kleur" required placeholder="Bijv. mintgroen, paars en goud, pastel roze...">
+            </div>
 
-const form = document.getElementById('mugForm');
-const submitBtn = document.getElementById('submitBtn');
-const successMessage = document.getElementById('successMessage');
-const errorMessage = document.getElementById('errorMessage');
+            <!-- Vak -->
+            <div class="question-group">
+                <label><span class="emoji-icon">📚</span>Welk vak of vakken geef je?</label>
+                <input type="text" name="vak" required placeholder="Bijv. Wiskunde, Nederlands">
+            </div>
 
-form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.textContent = '⏳ Bezig met verzenden...';
-    const formData = new FormData(form);
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
+            <!-- Graad -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🎓</span>In welke graad of leerjaar geef je les?</label>
+                <select name="graad" required>
+                    <option value="">-- Kies een optie --</option>
+                    <option value="Kleuterschool">Kleuterschool</option>
+                    <option value="1e leerjaar">1e leerjaar</option>
+                    <option value="2e leerjaar">2e leerjaar</option>
+                    <option value="3e leerjaar">3e leerjaar</option>
+                    <option value="4e leerjaar">4e leerjaar</option>
+                    <option value="5e leerjaar">5e leerjaar</option>
+                    <option value="6e leerjaar">6e leerjaar</option>
+                    <option value="1e middelbaar">1e middelbaar</option>
+                    <option value="2e middelbaar">2e middelbaar</option>
+                    <option value="3e middelbaar">3e middelbaar</option>
+                    <option value="4e middelbaar">4e middelbaar</option>
+                    <option value="5e middelbaar">5e middelbaar</option>
+                    <option value="6e middelbaar">6e middelbaar</option>
+                    <option value="Hogeschool">Hogeschool</option>
+                    <option value="Meerdere leerjaren">Meerdere leerjaren</option>
+                </select>
+            </div>
+
+            <!-- Lievelingsdier -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🐾</span>Wat is je lievelingsdier?</label>
+                <input type="text" name="dier" placeholder="Bijv. kat, hond, uil, olifant...">
+            </div>
+
+            <!-- Hobby's -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🎯</span>Wat zijn je hobby's in je vrije tijd?</label>
+                <input type="text" name="hobbys" placeholder="Bijv. lezen, yoga, tuinieren, reizen...">
+            </div>
+
+            <!-- Quote -->
+            <div class="question-group">
+                <label><span class="emoji-icon">💬</span>Heb je een favoriete quote of spreuk?</label>
+                <textarea name="quote" placeholder="Een motiverende uitspraak die je inspireert..."></textarea>
+            </div>
+
+            <!-- Stijl -->
+            <div class="question-group">
+                <label><span class="emoji-icon">✨</span>Welke stijl spreekt je aan?</label>
+                <div class="style-options">
+                    <div class="style-option">
+                        <input type="radio" name="stijl" id="style1" value="Modern/Minimalistisch" required>
+                        <label for="style1" class="style-card">
+                            <div class="style-emoji">🔲</div>
+                            <div>Modern/<br>Minimalistisch</div>
+                        </label>
+                    </div>
+                    <div class="style-option">
+                        <input type="radio" name="stijl" id="style2" value="Speels/Kleurrijk">
+                        <label for="style2" class="style-card">
+                            <div class="style-emoji">🎨</div>
+                            <div>Speels/<br>Kleurrijk</div>
+                        </label>
+                    </div>
+                    <div class="style-option">
+                        <input type="radio" name="stijl" id="style3" value="Elegant/Klassiek">
+                        <label for="style3" class="style-card">
+                            <div class="style-emoji">👑</div>
+                            <div>Elegant/<br>Klassiek</div>
+                        </label>
+                    </div>
+                    <div class="style-option">
+                        <input type="radio" name="stijl" id="style4" value="Grappig/Humoristisch">
+                        <label for="style4" class="style-card">
+                            <div class="style-emoji">😄</div>
+                            <div>Grappig/<br>Humoristisch</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Symbolen -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🌟</span>Zijn er specifieke symbolen of elementen die je graag op je mok zou zien?</label>
+                <input type="text" name="symbolen" placeholder="Bijv. boeken, appel, potlood, hart, sterren...">
+            </div>
+
+            <!-- Naam op mok -->
+            <div class="question-group">
+                <label><span class="emoji-icon">🏷️</span>Wil je je naam op de mok?</label>
+                <select name="naam_op_mok" id="naam_op_mok" required onchange="toggleNaamVeld()">
+                    <option value="">-- Kies een optie --</option>
+                    <option value="Ja">Ja, ik wil mijn naam op de mok</option>
+                    <option value="Nee">Nee, liever geen naam</option>
+                </select>
+            </div>
+
+            <div class="question-group" id="naam_veld" style="display:none;">
+                <label><span class="emoji-icon">✍️</span>Welke naam wil je op de mok?</label>
+                <input type="text" name="naam_tekst" id="naam_tekst" placeholder="Bijv. Juf Sarah, Meester Tom, of gewoon Sarah">
+                <p class="file-note">Tip: Je kunt ook een bijnaam of roepnaam gebruiken</p>
+            </div>
+
+            <!-- Extra wensen -->
+            <div class="question-group">
+                <label><span class="emoji-icon">💭</span>Heb je nog extra wensen of ideeën voor je mok?</label>
+                <textarea name="extra" placeholder="Vertel ons alles wat je nog kwijt wilt..."></textarea>
+            </div>
+
+            <!-- Upload foto -->
+            <div class="question-group">
+                <label><span class="emoji-icon">📸</span>Upload eventueel een foto ter inspiratie</label>
+                <input type="file" name="foto" accept="image/*">
+                <p class="file-note">Optioneel: Een foto van je huisdier, favoriete plek of andere inspiratie</p>
+            </div>
+
+            <!-- BETALING SECTIE -->
+            <div class="section-divider">
+                <h2 class="section-title">💳 Bestelling & Betaling</h2>
+                
+                <!-- Aantal mokken -->
+                <div class="question-group">
+                    <label><span class="emoji-icon">🔢</span>Hoeveel mokken wil je bestellen?</label>
+                    <select name="aantal" id="aantal" required onchange="calculateTotal()">
+                        <option value="">-- Kies aantal --</option>
+                        <option value="1">1 mok - €10,00</option>
+                        <option value="2">2 mokken - €18,00 (€9,00/stuk)</option>
+                        <option value="3">3 mokken - €27,00 (€9,00/stuk)</option>
+                        <option value="4">4 mokken - €36,00 (€9,00/stuk)</option>
+                        <option value="5+">5+ mokken - Neem contact op voor prijsafspraak</option>
+                    </select>
+                </div>
+
+                <!-- Leveradres -->
+                <div class="question-group">
+                    <label><span class="emoji-icon">📍</span>Waar wil je dat we de mok(ken) leveren?</label>
+                    <input type="text" name="leveradres" required placeholder="Bijv. Basisschool De Regenboog, lokaal 2.3, of gewoon thuis: Kerkstraat 123, 9000 Gent">
+                    <p class="file-note">We leveren gratis in België, op jouw campus.</p>
+                </div>
+
+                <!-- Hidden field voor totaalbedrag -->
+                <input type="hidden" name="totaalbedrag" id="totaalbedrag_hidden">
+
+                <!-- Totaal overzicht -->
+                <div class="price-box">
+                    <div class="price-row">
+                        <span>Mokken:</span>
+                        <span id="prijs-mokken">€0,00</span>
+                    </div>
+                    <div class="price-total">
+                        <span>Totaal:</span>
+                        <span id="prijs-totaal">€0,00</span>
+                    </div>
+                    <p style="margin-top:10px; font-size:0.85em; color:#666; text-align:center;">Gratis levering in België 🇧🇪</p>
+                </div>
+
+                <!-- Betaalinformatie sectie -->
+                <div class="info-box">
+                    <h3>☕ Belangrijke informatie</h3>
+                    
+                    <div class="info-section">
+                        <p>Onze mokken worden pas in productie genomen zodra de betaling is ontvangen en bevestigd.</p>
+                        <p><strong>Vermeld bij je overschrijving duidelijk je voor- en achternaam</strong>, zodat we je bestelling snel kunnen verwerken.</p>
+                    </div>
+
+                    <div class="bank-account">
+                        <p>💳 Gelieve te betalen via overschrijving naar:</p>
+                        <p>BE22 7310 7162 2347</p>
+                    </div>
+
+                    <div class="info-section">
+                        <p>Zodra we je betaling hebben ontvangen, starten we met het maken van je mok(ken) en houden we je op de hoogte!</p>
+                        <p style="text-align:center; font-weight:600;">✨ Bedankt voor je vertrouwen! ✨</p>
+                    </div>
+                </div>
+
+                <!-- Voorwaarden -->
+                <div class="question-group">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="voorwaarden" name="voorwaarden" required value="akkoord">
+                        <label for="voorwaarden">
+                            Ik ga akkoord met de algemene voorwaarden en het privacybeleid
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">🎉 Verstuur bestelling</button>
+        </form>
+
+        <div id="successMessage" style="display:none;"></div>
+        <div id="errorMessage" style="display:none;"></div>
+    </div>
+
+    <script>
+        // Toggle naam-veld
+        function toggleNaamVeld() {
+            const naamOpMok = document.getElementById('naam_op_mok').value;
+            const naamVeld = document.getElementById('naam_veld');
+            const naamTekst = document.getElementById('naam_tekst');
+            if (naamOpMok === 'Ja') {
+                naamVeld.style.display = 'block';
+                naamTekst.required = true;
+            } else {
+                naamVeld.style.display = 'none';
+                naamTekst.required = false;
+                naamTekst.value = '';
+            }
+        }
+
+        // Prijs berekenen
+        function calculateTotal() {
+            const aantal = document.getElementById('aantal').value;
+            let mokkenPrijs = 0;
+            if (aantal === '1') mokkenPrijs = 10;
+            else if (aantal === '2') mokkenPrijs = 18;
+            else if (aantal === '3') mokkenPrijs = 27;
+            else if (aantal === '4') mokkenPrijs = 36;
+            document.getElementById('prijs-mokken').textContent = '€' + mokkenPrijs.toFixed(2);
+            document.getElementById('prijs-totaal').textContent = '€' + mokkenPrijs.toFixed(2);
+            document.getElementById('totaalbedrag_hidden').value = '€' + mokkenPrijs.toFixed(2);
+        }
+
+        // Form handling (fetch naar Formspree, maar geen redirect)
+        const form = document.getElementById('mugForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Bezig met verzenden...';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' } // zorgt dat Formspree JSON terugstuurt i.p.v. redirect
+                });
+
+                if (response.ok) {
+                    // Haal wat velden voor de bevestiging
+                    const naam = formData.get('naam') || '';
+                    const email = formData.get('email') || '';
+                    const totaal = document.getElementById('prijs-totaal').textContent || '€0,00';
+                    const aantal = formData.get('aantal') || '';
+
+                    // Toon mooie groene succesmelding (in jouw stijl)
+                    successMessage.innerHTML = `
+                        <div class="success-message">
+                            <h3>🎉 Bedankt voor je bestelling, ${escapeHtml(naam)}!</h3>
+                            <p>We hebben je bestelling goed ontvangen en sturen spoedig een bevestiging naar <strong>${escapeHtml(email)}</strong>.</p>
+                            <p>Besteld: <strong>${escapeHtml(aantal)}</strong> mok(ken) — totaalbedrag <strong>${escapeHtml(totaal)}</strong>.</p>
+                            <p style="margin-top:10px;">💚 Zodra je betaling is ontvangen, starten we met het maken van je gepersonaliseerde mok(ken).</p>
+                            <p style="margin-top:15px;font-size:0.9em;">(Controleer ook even je spamfolder voor de zekerheid 😉)</p>
+                        </div>
+                    `;
+
+                    // Reset formulier en prijzen
+                    form.reset();
+                    document.getElementById('prijs-mokken').textContent = '€0,00';
+                    document.getElementById('prijs-totaal').textContent = '€0,00';
+                    document.getElementById('totaalbedrag_hidden').value = '';
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // response niet ok — toon fout
+                    throw new Error('Verzending mislukt (status ' + response.status + ')');
+                }
+            } catch (err) {
+                // Toon vriendelijke foutmelding
+                errorMessage.innerHTML = `
+                    <div class="error-message">
+                        <p>❌ Oeps — er ging iets mis bij het verzenden van je formulier. Probeer het nogmaals of stuur ons een e-mail.</p>
+                        <p style="margin-top:8px; font-size:0.9em;">(Fout: ${escapeHtml(err.message)})</p>
+                    </div>
+                `;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🎉 Verstuur bestelling';
+            }
         });
-        if (response.ok) {
-            const naam = formData.get('naam');
-            const email = formData.get('email');
-            const totaal = document.getElementById('prijs-totaal').textContent;
-            const aantal = formData.get('aantal');
-            successMessage.innerHTML = `
-                <div class="success-message">
-                    <h3>✅ Bedankt voor je bestelling, ${naam}!</h3>
-                    <p>We hebben je bestelling goed ontvangen en sturen spoedig een bevestiging naar <strong>${email}</strong>.</p>
-                    <p>Besteld: <strong>${aantal}</strong> mok(ken) — totaalbedrag <strong>${totaal}</strong>.</p>
-                    <p style="margin-top:10px;">💚 Zodra je betaling is ontvangen, starten we met het maken van je gepersonaliseerde mok(ken).</p>
-                    <p style="margin-top:15px;font-size:0.9em;">(Controleer ook even je spamfolder voor de zekerheid 😉)</p>
-                </div>`;
-            form.reset();
-            document.getElementById('prijs-totaal').textContent = '€0,00';
-            successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else { throw new Error('Verzending mislukt'); }
-    } catch (error) {
-        errorMessage.innerHTML = `<div class="error-message">
-            <p>❌ Oeps! Er ging iets mis bij het verzenden van je formulier. Probeer het opnieuw of stuur ons een mailtje.</p>
-        </div>`;
-        errorMessage.style.display = 'block';
-        successMessage.style.display = 'none';
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = '🎉 Verstuur bestelling';
-    }
-});
-</script>
+
+        // Kleine helper om HTML-injectie in de bevestiging te voorkomen (escape)
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
 </body>
 </html>
