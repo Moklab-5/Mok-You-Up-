@@ -395,7 +395,6 @@
                     document.getElementById('totaalbedrag_hidden').value = '';
                     successMessage.style.display = 'block';
                     errorMessage.style.display = 'none';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
                     // response niet ok — toon fout
                     throw new Error('Verzending mislukt (status ' + response.status + ')');
@@ -410,7 +409,6 @@
                 `;
                 errorMessage.style.display = 'block';
                 successMessage.style.display = 'none';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = '🎉 Verstuur bestelling';
