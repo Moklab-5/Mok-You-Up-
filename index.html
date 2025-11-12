@@ -12,58 +12,37 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 15px;
+            padding: 20px;
         }
         
         .container {
             max-width: 700px;
             margin: 0 auto;
             background: white;
-            border-radius: 16px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        
-        @media (min-width: 768px) {
-            .container {
-                padding: 40px;
-                border-radius: 20px;
-            }
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         
         h1 {
             color: #667eea;
             text-align: center;
-            margin-bottom: 8px;
-            font-size: 1.6em;
-        }
-        
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
+            margin-bottom: 10px;
+            font-size: 2em;
         }
         
         .subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 25px;
-            font-size: 1em;
-            line-height: 1.4;
-        }
-        
-        @media (min-width: 768px) {
-            .subtitle {
-                font-size: 1.1em;
-                margin-bottom: 30px;
-            }
+            margin-bottom: 30px;
+            font-size: 1.1em;
         }
         
         .question-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         label {
@@ -71,14 +50,7 @@
             font-weight: 600;
             color: #333;
             margin-bottom: 8px;
-            font-size: 0.95em;
-            line-height: 1.4;
-        }
-        
-        @media (min-width: 768px) {
-            label {
-                font-size: 1.05em;
-            }
+            font-size: 1.05em;
         }
         
         input[type="text"],
@@ -86,14 +58,12 @@
         select,
         textarea {
             width: 100%;
-            padding: 14px 12px;
+            padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 1em;
             transition: all 0.3s;
             font-family: inherit;
-            -webkit-appearance: none;
-            appearance: none;
         }
         
         input[type="text"]:focus,
@@ -105,23 +75,51 @@
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
         
-        select {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 20px;
-            padding-right: 40px;
-        }
-        
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 80px;
+        }
+        
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .color-option {
+            position: relative;
+        }
+        
+        .color-option input[type="radio"] {
+            display: none;
+        }
+        
+        .color-box {
+            width: 100%;
+            height: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .color-option input[type="radio"]:checked + .color-box {
+            border-color: #333;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
         .style-options {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 15px;
             margin-top: 10px;
         }
         
@@ -134,27 +132,17 @@
         }
         
         .style-card {
-            padding: 16px 12px;
+            padding: 20px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
         
-        @media (min-width: 768px) {
-            .style-card {
-                padding: 20px;
-            }
-        }
-        
-        .style-card:active {
-            transform: scale(0.98);
+        .style-card:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
         }
         
         .style-option input[type="radio"]:checked + .style-card {
@@ -168,351 +156,82 @@
             margin-bottom: 8px;
         }
         
-        .style-card div:last-child {
-            font-size: 0.9em;
-            line-height: 1.3;
-        }
-        
         input[type="file"] {
-            padding: 12px;
+            padding: 10px;
             border: 2px dashed #e0e0e0;
             border-radius: 8px;
             width: 100%;
             cursor: pointer;
-            font-size: 14px;
         }
         
         .file-note {
-            font-size: 0.85em;
+            font-size: 0.9em;
             color: #666;
-            margin-top: 6px;
-            line-height: 1.4;
+            margin-top: 5px;
         }
         
         .submit-btn {
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 1.05em;
+            font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 30px;
-            -webkit-tap-highlight-color: transparent;
         }
         
-        @media (min-width: 768px) {
-            .submit-btn {
-                font-size: 1.1em;
-            }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
         
         .submit-btn:active {
-            transform: scale(0.98);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+            transform: translateY(0);
         }
         
         .emoji-icon {
             margin-right: 5px;
         }
 
-        .success-message {
-            margin-top: 20px;
-            padding: 25px 20px;
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            border-radius: 12px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.3);
-        }
-        
-        @media (min-width: 768px) {
-            .success-message {
-                padding: 30px;
-                border-radius: 15px;
-            }
-        }
-
-        .success-message h3 {
-            font-size: 1.5em;
-            margin-bottom: 12px;
-        }
-        
-        @media (min-width: 768px) {
-            .success-message h3 {
-                font-size: 1.8em;
-                margin-bottom: 15px;
-            }
-        }
-
-        .success-message p {
-            font-size: 1em;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .error-message {
-            margin-top: 20px;
+        .result {
+            margin-top: 30px;
             padding: 20px;
-            background: #ff6b6b;
+            background: #f0f7ff;
             border-radius: 10px;
-            color: white;
-            text-align: center;
+            border-left: 4px solid #667eea;
         }
-        
-        .section-divider {
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 3px solid #667eea;
-        }
-        
-        @media (min-width: 768px) {
-            .section-divider {
-                margin-top: 50px;
-                padding-top: 30px;
-            }
-        }
-        
-        .section-title {
+
+        .result h3 {
             color: #667eea;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-        }
-        
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 1.6em;
-                margin-bottom: 25px;
-            }
-        }
-        
-        .address-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0;
-        }
-        
-        @media (min-width: 500px) {
-            .address-grid {
-                grid-template-columns: 1fr 2fr;
-                gap: 15px;
-            }
-        }
-        
-        .price-box {
-            background: #f8f9ff;
-            padding: 18px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.95em;
-        }
-        
-        .price-total {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 12px;
-            border-top: 2px solid #667eea;
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #667eea;
-        }
-        
-        @media (min-width: 768px) {
-            .price-total {
-                font-size: 1.2em;
-            }
-        }
-        
-        .info-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px 18px;
-            border-radius: 12px;
-            margin: 25px 0;
-            color: white;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
-        
-        @media (min-width: 768px) {
-            .info-box {
-                padding: 30px;
-                border-radius: 15px;
-                margin: 30px 0;
-            }
-        }
-        
-        .info-box h3 {
-            margin: 0 0 15px 0;
-            font-size: 1.2em;
-            text-align: center;
-        }
-        
-        @media (min-width: 768px) {
-            .info-box h3 {
-                font-size: 1.5em;
-                margin-bottom: 20px;
-            }
-        }
-        
-        .info-section {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 16px;
-            border-radius: 8px;
             margin-bottom: 15px;
-            backdrop-filter: blur(10px);
         }
-        
-        @media (min-width: 768px) {
-            .info-section {
-                padding: 20px;
-                border-radius: 10px;
-                margin-bottom: 20px;
-            }
-        }
-        
-        .info-section p {
-            margin: 0 0 12px 0;
-            font-size: 0.9em;
-            line-height: 1.6;
-        }
-        
-        .info-section p:last-child {
-            margin-bottom: 0;
-        }
-        
-        @media (min-width: 768px) {
-            .info-section p {
-                font-size: 0.95em;
-            }
-        }
-        
-        .bank-account {
+
+        .result-item {
+            margin-bottom: 10px;
+            padding: 8px;
             background: white;
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 15px;
+            border-radius: 5px;
         }
-        
-        @media (min-width: 768px) {
-            .bank-account {
-                padding: 25px;
-                margin-bottom: 20px;
-            }
-        }
-        
-        .bank-account p:first-child {
-            margin: 0 0 8px 0;
-            font-size: 0.85em;
-            color: #666;
+
+        .result-label {
             font-weight: 600;
-        }
-        
-        @media (min-width: 768px) {
-            .bank-account p:first-child {
-                font-size: 0.9em;
-            }
-        }
-        
-        .bank-account p:last-child {
-            margin: 0;
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #667eea;
-            letter-spacing: 1px;
-            font-family: 'Courier New', monospace;
-            word-break: break-all;
-        }
-        
-        @media (min-width: 768px) {
-            .bank-account p:last-child {
-                font-size: 1.8em;
-                letter-spacing: 2px;
-            }
-        }
-        
-        .checkbox-wrapper {
-            display: flex;
-            align-items: start;
-            gap: 10px;
-        }
-        
-        .checkbox-wrapper input[type="checkbox"] {
-            margin-top: 4px;
-            width: auto;
-            min-width: 18px;
-            min-height: 18px;
-            flex-shrink: 0;
-        }
-        
-        .checkbox-wrapper label {
-            font-weight: normal;
-            margin: 0;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        
-        @media (min-width: 768px) {
-            .checkbox-wrapper label {
-                font-size: 1em;
-            }
-        }
-        
-        .checkbox-wrapper a {
-            color: #667eea;
-            text-decoration: underline;
-        }
-        
-        .logo {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        
-        @media (min-width: 768px) {
-            .logo {
-                margin-bottom: 20px;
-            }
-        }
-        
-        .logo-text {
-            font-size: 2em;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        @media (min-width: 768px) {
-            .logo-text {
-                font-size: 2.5em;
-            }
+            color: #555;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <div class="logo-text">Mok You Up</div>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 2.5em; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Mok You Up</div>
         </div>
         <h1>☕ Jouw Persoonlijke Mok</h1>
         <p class="subtitle">Vertel ons over jezelf, wij ontwerpen jouw unieke mok!</p>
         
-        <form id="mugForm" action="https://formspree.io/f/manlgepk" method="POST" enctype="multipart/form-data">
+        <form id="mugForm">
             <!-- Persoonlijke Info -->
             <div class="question-group">
                 <label><span class="emoji-icon">👤</span>Wat is je voor- en achternaam?</label>
@@ -526,14 +245,14 @@
 
             <!-- School/Campus -->
             <div class="question-group">
-                <label><span class="emoji-icon">🏫</span>Op welke school of campus geef je les?</label>
-                <input type="text" name="school" required placeholder="Bijv. Basisschool De Regenboog">
+                <label><span class="emoji-icon">🏫</span>Op welke school of campus geef je les? (Je mok wordt hier geleverd)</label>
+                <input type="text" name="school" required placeholder="Bijv. Basisschool De Regenboog, Campus Sint-Pieters">
             </div>
 
             <!-- Kleur -->
             <div class="question-group">
                 <label><span class="emoji-icon">🎨</span>Wat is je lievelingskleur of kleurencombinatie?</label>
-                <input type="text" name="kleur" required placeholder="Bijv. mintgroen, paars en goud">
+                <input type="text" name="kleur" required placeholder="Bijv. mintgroen, paars en goud, pastel roze...">
             </div>
 
             <!-- Vak -->
@@ -574,13 +293,13 @@
             <!-- Hobby's -->
             <div class="question-group">
                 <label><span class="emoji-icon">🎯</span>Wat zijn je hobby's in je vrije tijd?</label>
-                <input type="text" name="hobbys" placeholder="Bijv. lezen, yoga, tuinieren">
+                <input type="text" name="hobbys" placeholder="Bijv. lezen, yoga, tuinieren, reizen...">
             </div>
 
             <!-- Quote -->
             <div class="question-group">
                 <label><span class="emoji-icon">💬</span>Heb je een favoriete quote of spreuk?</label>
-                <textarea name="quote" placeholder="Een motiverende uitspraak..."></textarea>
+                <textarea name="quote" placeholder="Een motiverende uitspraak die je inspireert..."></textarea>
             </div>
 
             <!-- Stijl -->
@@ -620,8 +339,8 @@
 
             <!-- Symbolen -->
             <div class="question-group">
-                <label><span class="emoji-icon">🌟</span>Specifieke symbolen of elementen voor je mok?</label>
-                <input type="text" name="symbolen" placeholder="Bijv. boeken, appel, hart, sterren">
+                <label><span class="emoji-icon">🌟</span>Zijn er specifieke symbolen of elementen die je graag op je mok zou zien?</label>
+                <input type="text" name="symbolen" placeholder="Bijv. boeken, appel, potlood, hart, sterren...">
             </div>
 
             <!-- Naam op mok -->
@@ -636,37 +355,37 @@
 
             <div class="question-group" id="naam_veld" style="display: none;">
                 <label><span class="emoji-icon">✍️</span>Welke naam wil je op de mok?</label>
-                <input type="text" name="naam_tekst" id="naam_tekst" placeholder="Bijv. Juf Sarah, Meester Tom">
-                <p class="file-note">Je kunt ook een bijnaam gebruiken</p>
+                <input type="text" name="naam_tekst" id="naam_tekst" placeholder="Bijv. Juf Sarah, Meester Tom, of gewoon Sarah">
+                <p class="file-note">Tip: Je kunt ook een bijnaam of roepnaam gebruiken</p>
             </div>
 
             <!-- Extra wensen -->
             <div class="question-group">
-                <label><span class="emoji-icon">💭</span>Nog extra wensen of ideeën voor je mok?</label>
-                <textarea name="extra" placeholder="Vertel ons wat je nog kwijt wilt..."></textarea>
+                <label><span class="emoji-icon">💭</span>Heb je nog extra wensen of ideeën voor je mok?</label>
+                <textarea name="extra" placeholder="Vertel ons alles wat je nog kwijt wilt..."></textarea>
             </div>
 
             <!-- Upload foto -->
             <div class="question-group">
                 <label><span class="emoji-icon">📸</span>Upload eventueel een foto ter inspiratie</label>
                 <input type="file" name="foto" accept="image/*">
-                <p class="file-note">Optioneel: foto van je huisdier, favoriete plek of andere inspiratie</p>
+                <p class="file-note">Optioneel: Een foto van je huisdier, favoriete plek of andere inspiratie</p>
             </div>
 
             <!-- BETALING SECTIE -->
-            <div class="section-divider">
-                <h2 class="section-title">💳 Bestelling & Betaling</h2>
+            <div style="margin-top: 50px; padding-top: 30px; border-top: 3px solid #667eea;">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">💳 Bestelling & Betaling</h2>
                 
                 <!-- Aantal mokken -->
                 <div class="question-group">
                     <label><span class="emoji-icon">🔢</span>Hoeveel mokken wil je bestellen?</label>
                     <select name="aantal" id="aantal" required onchange="calculateTotal()">
                         <option value="">-- Kies aantal --</option>
-                        <option value="1 mok">1 mok - €10,00</option>
-                        <option value="2 mokken">2 mokken - €18,00 (€9/stuk)</option>
-                        <option value="3 mokken">3 mokken - €27,00 (€9/stuk)</option>
-                        <option value="4 mokken">4 mokken - €36,00 (€9/stuk)</option>
-                        <option value="5+ mokken">5+ mokken - Neem contact op</option>
+                        <option value="1">1 mok - €10,00</option>
+                        <option value="2">2 mokken - €18,00 (€9,00/stuk)</option>
+                        <option value="3">3 mokken - €27,00 (€9,00/stuk)</option>
+                        <option value="4">4 mokken - €36,00 (€9,00/stuk)</option>
+                        <option value="5">5+ mokken - Neem contact op voor prijsafspraak</option>
                     </select>
                 </div>
 
@@ -676,7 +395,7 @@
                     <input type="text" name="straat" required placeholder="Bijv. Kerkstraat 123">
                 </div>
 
-                <div class="address-grid">
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px;">
                     <div class="question-group">
                         <label><span class="emoji-icon">📮</span>Postcode</label>
                         <input type="text" name="postcode" required placeholder="9000">
@@ -687,58 +406,83 @@
                     </div>
                 </div>
 
-                <!-- Hidden field voor totaalbedrag -->
-                <input type="hidden" name="totaalbedrag" id="totaalbedrag_hidden">
+                <div class="question-group">
+                    <label><span class="emoji-icon">🌍</span>Land</label>
+                    <select name="land" id="land" required onchange="calculateTotal()">
+                        <option value="België">België (gratis verzending)</option>
+                        <option value="Nederland">Nederland (+€3,50 verzending)</option>
+                        <option value="Andere">Ander land (verzendkosten op aanvraag)</option>
+                    </select>
+                </div>
 
                 <!-- Totaal overzicht -->
-                <div class="price-box">
-                    <div class="price-row">
+                <div style="background: #f8f9ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                         <span>Mokken:</span>
                         <span id="prijs-mokken">€0,00</span>
                     </div>
-                    <div class="price-total">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Verzendkosten:</span>
+                        <span id="prijs-verzending">€0,00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 2px solid #667eea; font-weight: bold; font-size: 1.2em; color: #667eea;">
                         <span>Totaal:</span>
                         <span id="prijs-totaal">€0,00</span>
                     </div>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #666; text-align: center;">Gratis verzending in België</p>
                 </div>
 
                 <!-- Betaalinformatie sectie -->
-                <div class="info-box">
-                    <h3>☕ Belangrijke informatie</h3>
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; margin: 30px 0; color: white; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                    <h3 style="margin: 0 0 20px 0; font-size: 1.5em; text-align: center;">
+                        ☕ Belangrijke informatie over je bestelling
+                    </h3>
                     
-                    <div class="info-section">
-                        <p>Onze mokken worden pas in productie genomen zodra de betaling is ontvangen en bevestigd.</p>
-                        <p><strong>Vermeld bij je overschrijving duidelijk je voor- en achternaam</strong>, zodat we je bestelling snel kunnen verwerken.</p>
+                    <div style="background: rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 10px; margin-bottom: 20px; backdrop-filter: blur(10px);">
+                        <p style="margin: 0 0 15px 0; font-size: 0.95em; line-height: 1.6;">
+                            Onze mokken worden pas in productie genomen zodra de betaling is ontvangen en bevestigd.
+                        </p>
+                        <p style="margin: 0; font-size: 0.95em; line-height: 1.6;">
+                            <strong>Gelieve bij je overschrijving duidelijk je voor- en achternaam te vermelden</strong>, zodat we je bestelling snel kunnen koppelen en verwerken.
+                        </p>
                     </div>
 
-                    <div class="bank-account">
-                        <p>💳 Gelieve te betalen via overschrijving naar:</p>
-                        <p>BE22 7310 7162 2347</p>
+                    <div style="background: white; color: #333; padding: 25px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                        <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #666; font-weight: 600;">
+                            💳 Gelieve te betalen via overschrijving naar:
+                        </p>
+                        <p style="margin: 0; font-size: 1.8em; font-weight: bold; color: #667eea; letter-spacing: 2px; font-family: 'Courier New', monospace;">
+                            BE22 7310 7162 2347
+                        </p>
                     </div>
 
-                    <div class="info-section">
-                        <p>Zodra we je betaling hebben ontvangen, starten we met het maken van je mok(ken) en houden we je op de hoogte!</p>
-                        <p style="text-align: center; font-weight: 600;">✨ Bedankt voor je vertrouwen! ✨</p>
+                    <div style="background: rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 10px; backdrop-filter: blur(10px);">
+                        <p style="margin: 0 0 15px 0; font-size: 0.95em; line-height: 1.6;">
+                            Zodra we je betaling hebben ontvangen, starten we met het maken van je mok(ken) en houden we je op de hoogte van de verdere voortgang.
+                        </p>
+                        <p style="margin: 0; font-size: 0.95em; line-height: 1.6; text-align: center; font-weight: 600;">
+                            ✨ Bedankt voor je begrip en vertrouwen! ✨
+                        </p>
                     </div>
                 </div>
 
                 <!-- Voorwaarden -->
                 <div class="question-group">
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="voorwaarden" name="voorwaarden" required value="akkoord">
-                        <label for="voorwaarden">
-                            Ik ga akkoord met de algemene voorwaarden en het privacybeleid
+                    <div style="display: flex; align-items: start; gap: 10px;">
+                        <input type="checkbox" id="voorwaarden" name="voorwaarden" required style="margin-top: 4px; width: auto;">
+                        <label for="voorwaarden" style="font-weight: normal; margin: 0;">
+                            Ik ga akkoord met de <a href="#" style="color: #667eea; text-decoration: underline;">algemene voorwaarden</a> en het privacybeleid
                         </label>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">🎉 Verstuur bestelling</button>
+            <button type="submit" class="submit-btn">🎉 Verstuur bestelling</button>
         </form>
 
-        <div id="successMessage" style="display: none;"></div>
-        <div id="errorMessage" style="display: none;"></div>
+        <div id="result" class="result" style="display: none;">
+            <h3>✅ Bedankt voor je inzending!</h3>
+            <div id="resultContent"></div>
+        </div>
     </div>
 
     <script>
@@ -753,52 +497,87 @@
             } else {
                 naamVeld.style.display = 'none';
                 naamTekst.required = false;
-                naamTekst.value = '';
             }
         }
 
+        const form = document.getElementById('mugForm');
+        const resultDiv = document.getElementById('result');
+        const resultContent = document.getElementById('resultContent');
+
         function calculateTotal() {
+            let total = 0;
+            
+            // Prijs mokken
             const aantal = document.getElementById('aantal').value;
             let mokkenPrijs = 0;
-            
-            if (aantal === '1 mok') mokkenPrijs = 10;
-            else if (aantal === '2 mokken') mokkenPrijs = 18;
-            else if (aantal === '3 mokken') mokkenPrijs = 27;
-            else if (aantal === '4 mokken') mokkenPrijs = 36;
+            if (aantal === '1') mokkenPrijs = 10;
+            else if (aantal === '2') mokkenPrijs = 18;
+            else if (aantal === '3') mokkenPrijs = 27;
+            else if (aantal === '4') mokkenPrijs = 36;
             
             document.getElementById('prijs-mokken').textContent = '€' + mokkenPrijs.toFixed(2);
-            document.getElementById('prijs-totaal').textContent = '€' + mokkenPrijs.toFixed(2);
-            document.getElementById('totaalbedrag_hidden').value = '€' + mokkenPrijs.toFixed(2);
+            total += mokkenPrijs;
+            
+            // Verzendkosten
+            const land = document.getElementById('land').value;
+            let verzendkosten = 0;
+            if (land === 'Nederland') verzendkosten = 3.50;
+            document.getElementById('prijs-verzending').textContent = '€' + verzendkosten.toFixed(2);
+            total += verzendkosten;
+            
+            document.getElementById('prijs-totaal').textContent = '€' + total.toFixed(2);
         }
 
-        const form = document.getElementById('mugForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
-
-        form.addEventListener('submit', async function(e) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            submitBtn.disabled = true;
-            submitBtn.textContent = '⏳ Bezig met verzenden...';
-            
             const formData = new FormData(form);
+            let html = '<h4 style="margin-bottom: 15px;">📋 Ontwerp voorkeuren</h4>';
             
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    const naam = formData.get('naam');
-                    const email = formData.get('email');
-                    const totaal = document.getElementById('prijs-totaal').textContent;
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'foto' && value && !['naam_op_mok', 'naam_tekst', 'aantal', 'straat', 'postcode', 'stad', 'land', 'voorwaarden'].includes(key)) {
+                    const labels = {
+                        'naam': 'Voor- en achternaam',
+                        'email': 'E-mail',
+                        'school': 'School/Campus',
+                        'kleur': 'Lievelingskleur',
+                        'vak': 'Vak(ken)',
+                        'graad': 'Graad/Leerjaar',
+                        'dier': 'Lievelingsdier',
+                        'hobbys': 'Hobby\'s',
+                        'quote': 'Favoriete quote',
+                        'stijl': 'Stijl',
+                        'symbolen': 'Symbolen',
+                        'extra': 'Extra wensen'
+                    };
                     
-                    successMessage.innerHTML = `
-                        <div class="success-message">
-                            <h3>✅ Bestelling ontvangen!</h3>
-                            <p>Be
+                    html += `<div class="result-item"><span class="result-label">${labels[key]}:</span> ${value}</div>`;
+                }
+            }
+            
+            // Naam
+            const naamOpMok = formData.get('naam_op_mok');
+            if (naamOpMok === 'Ja') {
+                html += `<div class="result-item"><span class="result-label">Naam op mok:</span> ${formData.get('naam_tekst')}</div>`;
+            } else {
+                html += `<div class="result-item"><span class="result-label">Naam op mok:</span> Geen naam gewenst</div>`;
+            }
+            
+            if (formData.get('foto') && formData.get('foto').name) {
+                html += `<div class="result-item"><span class="result-label">Foto:</span> ${formData.get('foto').name} geüpload</div>`;
+            }
+            
+            html += '<h4 style="margin: 20px 0 15px 0;">🚚 Bezorg- en betaalgegevens</h4>';
+            html += `<div class="result-item"><span class="result-label">Aantal mokken:</span> ${formData.get('aantal')}</div>`;
+            html += `<div class="result-item"><span class="result-label">Bezorgadres:</span> ${formData.get('straat')}, ${formData.get('postcode')} ${formData.get('stad')}, ${formData.get('land')}</div>`;
+            html += `<div class="result-item"><span class="result-label">Betaalmethode:</span> Overschrijving</div>`;
+            html += `<div class="result-item" style="background: #667eea; color: white; font-weight: bold;"><span class="result-label" style="color: white;">Totaalbedrag:</span> ${document.getElementById('prijs-totaal').textContent}</div>`;
+            html += '<p style="margin-top: 15px; color: #666;">Je ontvangt binnen 24 uur een bevestiging per email. Na betaling starten we met het ontwerpen van je persoonlijke mok!</p>';
+            
+            resultContent.innerHTML = html;
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
